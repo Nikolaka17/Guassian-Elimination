@@ -111,6 +111,15 @@ public class Elimination{
   }
   
   public static Equation[] algorithm(Equation[] initial){
-	  
+	  Equation[] out = initial;
+	  for(int i = 0; i < out.length; i++){
+		if(out[i].getCoefficients()[i] != 0){
+			out[i] = out[i].divide(out[i].getCoefficients()[i]);
+		}
+		for(int j = i + 1; j < out.length; j++){
+			out[j] = out[j].add(out[i].multiply(-out[j].getCoefficients()[i]));
+		}
+	  }
+	  return out;
   }
 }
